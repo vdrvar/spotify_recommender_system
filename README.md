@@ -8,7 +8,17 @@ The recommender system will leverage machine learning techniques to analyze Spot
 
 ## Dataset
 
-The dataset used in this project is obtained from Kaggle and includes a comprehensive collection of Spotify song data, including metadata, audio features, and user listening history. The dataset provides valuable insights into song characteristics and user preferences, which will be used to train and evaluate the recommender system.
+This project aims to develop a recommender system for Spotify songs using datasets obtained from Kaggle. We are utilizing two primary datasets:
+
+1. [Spotify Dataset](https://www.kaggle.com/datasets/vatsalmavani/spotify-dataset) by Vatsal Mavani
+2. [Spotify Tracks Dataset](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset) by Maharshi Pandya
+
+These datasets contain valuable information about Spotify tracks, including various features and attributes that can be used to build a recommendation engine.
+
+For inspiration and guidance, we refer to the following notebook on Kaggle:
+
+- [Simple Music Recommendation System](https://www.kaggle.com/code/akbareza/simple-music-recommendation-system) by Akbar Eza
+
 
 ## Project Structure
 
