@@ -15,7 +15,7 @@ The dataset used in this project is obtained from Kaggle and includes a comprehe
 - `data/`: Contains the dataset files obtained from Kaggle.
 - `notebooks/`: Jupyter notebooks for data exploration, preprocessing, model development, and evaluation.
 - `src/`: Source code for the recommender system implementation.
-- `docs/`: Documentation files, including this README.
+- `docs/`: Documentation files.
 
 ## Usage
 
@@ -31,7 +31,7 @@ The dataset used in this project is obtained from Kaggle and includes a comprehe
 
 ## Contributors
 
-- [Your Name](https://github.com/vdrvar)
+- [Vjekoslav Drvar](https://github.com/vdrvar)
 
 ## Acknowledgments
 
