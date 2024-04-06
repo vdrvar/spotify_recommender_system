@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Spotify Recommender System{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #191414;
+            color: #FFFFFF;
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            font-size: 18px;
+        }
+        .header {
+            background-color: #1DB954;
+            color: #FFFFFF;
+            padding: 40px;
+            font-size: 36px;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .home-button {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            color: white;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+        }
+        .content {
+            padding: 50px 20px;
+        }
+        button, .button-link {
+            background-color: #1DB954;
+            color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        button:hover, .button-link:hover {
+            background-color: #1ed760;
+        }
+        /* Separator styling */
+        .separator {
+            margin: 40px 0; /* Adds vertical space for separation */
+            /* Uncomment for a visible line separator */
+            /* border-top: 1px solid #555; */
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <button onclick="location.href='/'" class="home-button">Home</button>
+        {% block header %}Spotify Recommender System{% endblock %}
+    </div>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

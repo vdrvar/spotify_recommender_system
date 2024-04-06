@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="description">
+    With this app, we can explore songs from the Spotify dataset, we can mark the songs we like (favorites) and then get some recommendations.
+</div>
+
+<!-- Visual separation -->
+<div class="separator"></div>
+
+<div class="welcome-message">
+    Welcome! What would you like to do?
+</div>
+<div class="buttons">
+    <button onclick="location.href='/explore'">Explore Songs</button>
+    <button onclick="location.href='/recommend'">Give Me Recommendations</button>
+    <a href="/" class="button-link">Forget My Favorites</a>
+</div>
+{% endblock %}
