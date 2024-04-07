@@ -50,11 +50,6 @@ def make_encoded_dataset(df):
     # Count occurrences of "track_id"
     track_id_count = columns.count("track_id")
 
-    # Check if "track_id" appears more than once
-    if track_id_count > 1:
-        print(f"'track_id' appears {track_id_count} times in the DataFrame columns.")
-    else:
-        print("'track_id' does not appear more than once.")
 
 
     #scaling numerical features
@@ -140,4 +135,38 @@ def get_recommendations(track_id_list, data, similarity_matrix, N=5):
         recommended_list[i]['similarity_score'] = avg_sim_scores[idx]
     
     return recommended_list
+
+def get_popular_songs(data_encoded, seen_track_ids, N=5):
+    # Ensure data_encoded is not modified
+    data = data_encoded.copy()
     
+    # Exclude songs that have already been seen
+    data = data[~data['track_id'].isin(seen_track_ids)]
+    
+    # Invert the popularity score if higher scores indicate higher popularity
+    max_popularity = data['popularity'].max()
+    data['inverse_popularity'] = max_popularity - data['popularity']
+    
+    # Normalize the inverse popularity scores to sum to 1 (to use as probabilities)
+    data['inverse_popularity'] /= data['inverse_popularity'].sum()
+    
+    # It's possible that after filtering, fewer than N songs remain
+    num_songs_to_select = min(N, len(data))
+    
+    # Select N songs randomly, weighted by the inverse of their popularity
+    selected_indices = np.random.choice(data.index, size=num_songs_to_select, replace=False, p=data['inverse_popularity'].values)
+    selected_songs = data.loc[selected_indices]
+    
+    # Format the selected songs in the desired output format
+    recommended_songs = selected_songs[['track_id', 'track_name', 'artists', 'album_name']]
+    recommended_list = recommended_songs.to_dict(orient='records')
+    
+    # Add a placeholder similarity score since it's not applicable in this context
+    for song in recommended_list:
+        song['similarity_score'] = None
+    
+    return recommended_list
+    
+def update_seen_songs(seen_songs, new_songs):
+    seen_songs.update(new_songs)
+    session['seen_songs'] = seen_songs  # Update the session

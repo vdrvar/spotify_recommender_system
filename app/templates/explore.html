@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 
-{% block title %}Explore Songs{% endblock %}
-
 {% block content %}
-<div class="welcome-message">
-    Here are some popular songs, which ones do you like?
+<h2>Popular Songs</h2>
+<div class="songs-grid">
+    {% for song in songs %}
+        <div class="song-card">
+            <p class="song-title">{{ song['track_name'] }}</p>
+            <p class="song-artist">{{ song['artists'] }}</p>
+        </div>
+    {% else %}
+        <p>No songs to display.</p>
+    {% endfor %}
 </div>
-<!-- Add song exploration content here -->
 {% endblock %}

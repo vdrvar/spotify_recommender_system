@@ -61,6 +61,31 @@
             /* Uncomment for a visible line separator */
             /* border-top: 1px solid #555; */
         }
+        /* Grid layout for songs */
+        .songs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* Creates a 3-column grid */
+            gap: 20px; /* Space between grid items */
+            padding: 20px; /* Padding around the grid */
+            max-width: 800px; /* Maximum width of the grid */
+            margin: auto; /* Center the grid horizontally */
+        }
+        .song-card {
+            background-color: #1DB954; /* Spotify green */
+            color: #FFFFFF;
+            padding: 15px;
+            border-radius: 10px; /* Rounded corners */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .song-title, .song-artist {
+            margin: 5px 0;
+        }
+        .song-title {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>

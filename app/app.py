@@ -1,21 +1,77 @@
 from flask import Flask, render_template, redirect, url_for
+from flask import session
 
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics.pairwise import cosine_similarity, rbf_kernel
+import random
+
+import os, sys
+
+# Determine the directory path of the currently executing script
+dir_path = os.path.dirname(os.path.realpath(__file__))
+# Include the 'code' directory to the system path to import custom utility functions
+sys.path.append(os.path.join(dir_path, '../code'))
+
+# Import custom utility functions from utils.py
+from utils import *
+
+# Construct the absolute path to the dataset
+data_file_path = os.path.join(dir_path, '../data/complete_dataset.csv')
+# Load the dataset into a pandas DataFrame
+df = pd.read_csv(data_file_path)
+
+# Preprocess the dataset to encode categorical features and scale numerical features
+data_encoded = make_encoded_dataset(df)
+
+# Calculate the combined similarity matrix based on cosine and RBF kernel similarities
+combined_sim = make_similarities(df=df, de=data_encoded, cos_ratio=0.2, rbf_ratio=0.8)
+
+# Initialize the Flask application
 app = Flask(__name__)
+# Set a secret key for session management. Replace 'your secret key' with a real secret key for production.
+app.secret_key = 'your secret key'
 
+# Define the route for the home page
 @app.route('/')
 def home():
-    # Placeholder functionality for resetting any 'favorites' related variable
-    # This could be where you reset a session variable or similar in the future
+    # Render the index.html template for the home page
     return render_template('index.html')
 
 @app.route('/explore')
 def explore():
-    return render_template('explore.html')
+    # Ensure 'seen_songs' is initialized in the session
+    if 'seen_songs' not in session:
+        session['seen_songs'] = []
 
+    # Convert the list of seen song IDs from the session into a set for efficient lookup
+    seen_songs = set(session['seen_songs'])
+
+    # Fetch 6 popular songs, excluding those that have been seen
+    N = 6
+    popular_songs = get_popular_songs(data_encoded, seen_songs, N)
+
+    # Update the set of seen songs with the IDs of the newly fetched songs
+    for song in popular_songs:
+        seen_songs.add(song['track_id'])
+
+    # Update the session. Convert the set back into a list since session data must be serializable
+    session['seen_songs'] = list(seen_songs)
+
+    # For debugging: print the seen_songs to the console
+    print("Seen songs:", session['seen_songs'])
+
+    # Render the explore.html template, passing the popular_songs to the template
+    return render_template('explore.html', songs=popular_songs)
+
+
+# Define the route for the song recommendation page
 @app.route('/recommend')
 def recommend():
+    # Render the recommend.html template for the song recommendation page
     return render_template('recommend.html')
 
-
+# The entry point for running the Flask app
 if __name__ == '__main__':
     app.run(debug=True)
