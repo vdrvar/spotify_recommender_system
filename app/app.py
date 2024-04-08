@@ -1,5 +1,5 @@
-from flask import Flask, render_template, redirect, url_for
-from flask import session
+from flask import Flask, render_template, redirect, url_for, session, request
+
 
 import pandas as pd
 import numpy as np
@@ -36,6 +36,8 @@ app.secret_key = 'your secret key'
 # Define the route for the home page
 @app.route('/')
 def home():
+    if 'favorites' not in session:
+        session['favorites'] = []  # Initialize an empty favorites list
     # Render the index.html template for the home page
     return render_template('index.html')
 
@@ -59,18 +61,35 @@ def explore():
     # Update the session. Convert the set back into a list since session data must be serializable
     session['seen_songs'] = list(seen_songs)
 
-    # For debugging: print the seen_songs to the console
-    print("Seen songs:", session['seen_songs'])
-
     # Render the explore.html template, passing the popular_songs to the template
     return render_template('explore.html', songs=popular_songs)
 
+@app.route('/add_favorites', methods=['POST'])
+def add_favorites():
+    track_ids = request.form.getlist('track_ids')
+    if 'favorites' not in session:
+        session['favorites'] = []
 
-# Define the route for the song recommendation page
+    for track_id in track_ids:
+        if track_id not in session['favorites']:
+            session['favorites'].append(track_id)
+    session.modified = True
+
+    return redirect(url_for('explore'))
+
+
 @app.route('/recommend')
 def recommend():
     # Render the recommend.html template for the song recommendation page
     return render_template('recommend.html')
+
+@app.route('/reset')
+def reset_data():
+    # Reset the 'seen_songs' in the session
+    session['seen_songs'] = []
+    
+    # Redirect to the home page or another page as needed
+    return redirect(url_for('home'))
 
 # The entry point for running the Flask app
 if __name__ == '__main__':
