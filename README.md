@@ -1,53 +1,61 @@
-# Spotify Song Recommender System
-
-This project aims to build a recommender system for songs using Spotify data obtained from Kaggle. The goal is to provide personalized song recommendations to users based on their listening history, preferences, and other relevant factors.
+# Spotify Recommender System
 
 ## Overview
+The Spotify Recommender System is a Flask-based web application designed to provide personalized song recommendations. Leveraging user preferences and a sophisticated recommendation algorithm, the system curates a list of songs that users might enjoy, based on their interaction history and selected favorites.
 
-The recommender system will leverage machine learning techniques to analyze Spotify data, including features such as song attributes, user listening behavior, and user profiles. It will then generate recommendations that are tailored to each user's taste in music.
+## Features
+- **Explore Songs**: Browse through a curated list of songs.
+- **Personalized Recommendations**: Receive song recommendations tailored to your musical taste.
+- **Favorites**: Add songs to your favorites list for personalized recommendations.
+- **Responsive Design**: Enjoy a seamless experience across different devices.
 
-## Dataset
+## Technologies Used
+- Flask: A lightweight WSGI web application framework.
+- Python: The backend programming language.
+- PostgreSQL (Planned): For persistent storage of user data and preferences.
+- HTML/CSS: For the frontend design.
+- JavaScript (Planned): To enhance interactivity and user experience.
 
-This project aims to develop a recommender system for Spotify songs using datasets obtained from Kaggle. We are utilizing two primary datasets:
+## Getting Started
 
-1. [Spotify Dataset](https://www.kaggle.com/datasets/vatsalmavani/spotify-dataset) by Vatsal Mavani
-2. [Spotify Tracks Dataset](https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset) by Maharshi Pandya
+### Prerequisites
+Ensure you have Python 3.6+ installed on your system. Flask can be installed and run on Windows, macOS, and Linux environments.
 
-These datasets contain valuable information about Spotify tracks, including various features and attributes that can be used to build a recommendation engine.
+### Installation
+1. Clone the repository:
+git clone https://github.com/vdrvar/spotify-recommender-system.git
 
-For inspiration and guidance, we refer to the following notebook on Kaggle:
+2. Navigate to the project directory:
+cd spotify-recommender-system
 
-- [Simple Music Recommendation System](https://www.kaggle.com/code/akbareza/simple-music-recommendation-system) by Akbar Eza
+3. Install the required packages:
+pip install -r requirements.txt
 
+4. Run the Flask application:
+flask run
 
-## Project Structure
-
-- `data/`: Contains the dataset files obtained from Kaggle.
-- `notebooks/`: Jupyter notebooks for data exploration, preprocessing, model development, and evaluation.
-- `src/`: Source code for the recommender system implementation.
-- `docs/`: Documentation files.
 
 ## Usage
+After running the application, visit `http://127.0.0.1:5000/` in your web browser to start exploring songs and receiving recommendations.
 
-1. **Data Exploration**: Use the Jupyter notebooks in the `notebooks/` directory to explore the dataset, analyze song features, and understand user listening behavior.
+## Contributing
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-2. **Preprocessing**: Preprocess the dataset to extract relevant features, handle missing values, and prepare the data for model training.
-
-3. **Model Development**: Develop machine learning models, such as collaborative filtering, content-based filtering, or hybrid methods, to generate song recommendations.
-
-4. **Evaluation**: Evaluate the performance of the recommender system using appropriate metrics, such as precision, recall, and mean average precision.
-
-5. **Deployment**: Deploy the trained model as a web application or API for users to interact with and receive song recommendations.
-
-## Contributors
-
-- [Vjekoslav Drvar](https://github.com/vdrvar)
-
-## Acknowledgments
-
-- This project is inspired by the need for personalized music recommendations and the availability of Spotify data on Kaggle.
-- Special thanks to Kaggle for providing the Spotify dataset used in this project.
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
+Distributed under the MIT License. See `LICENSE` for more information.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Contact
+Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
+
+Project Link: [https://github.com/vdrvar/spotify-recommender-system](https://github.com/vdrvar/spotify-recommender-system)
+
+## Acknowledgements
+- [Flask](https://flask.palletsprojects.com/)
+- [Python](https://www.python.org/)
+- [Your acknowledgements]
