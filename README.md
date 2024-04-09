@@ -51,11 +51,10 @@ Contributions are what make the open-source community such an amazing place to l
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
+Your Name - [@v_drvar](https://twitter.com/yourtwitter)
 
 Project Link: [https://github.com/vdrvar/spotify-recommender-system](https://github.com/vdrvar/spotify-recommender-system)
 
 ## Acknowledgements
 - [Flask](https://flask.palletsprojects.com/)
 - [Python](https://www.python.org/)
-- [Your acknowledgements]
