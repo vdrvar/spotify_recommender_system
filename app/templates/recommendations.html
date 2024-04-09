@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Recommendations for You</h2>
+<form action="{{ url_for('add_favorites') }}" method="post">
+    <div class="songs-grid">
+        {% for song in songs %}
+            <div class="song-card">
+                <!-- Checkbox for selecting the song -->
+                <input type="checkbox" name="track_ids" value="{{ song['track_id'] }}" id="song-{{ loop.index }}" class="song-checkbox">
+                <label for="song-{{ loop.index }}" class="song-label">
+                    <p class="song-title">{{ song['track_name'] }}</p>
+                    <p class="song-artist">{{ song['artists'].replace(';', ' & ') }}</p>
+                </label>
+            </div>
+        {% else %}
+            <p>Explore more songs and add them to your favorites to get personalized recommendations!</p>
+        {% endfor %}
+    </div>
+    <!-- Add to Favorites button -->
+    <div class="action-buttons">
+        <button type="submit">Add to Favorites</button>
+    </div>
+</form>
+
+<!-- Action buttons section -->
+<div class="action-buttons">
+    <button onclick="location.href='/explore'">Explore Songs</button>
+    <button onclick="location.href='/recommend'">Give Me Recommendations</button>
+    <a href="/reset" class="button-link">Reset My Data</a>
+</div>
+{% endblock %}

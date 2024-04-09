@@ -74,24 +74,42 @@ def add_favorites():
     for track_id in track_ids:
         if track_id not in session['favorites']:
             session['favorites'].append(track_id)
+
     session.modified = True
 
-    return redirect(url_for('explore'))
+    # Redirect user back to the page they came from
+    if request.referrer:
+        if '/explore' in request.referrer:
+            return redirect(url_for('explore'))
+        elif '/recommend' in request.referrer:
+            return redirect(url_for('recommend'))
+    return redirect(url_for('home'))
 
 
 @app.route('/recommend')
 def recommend():
-    # Check if 'favorites' exists in session and is not empty
     if 'favorites' not in session or not session['favorites']:
-        # If there are no favorites, render a specific template or return a custom message
-        # This uses a custom template 'no_favorites.html' for displaying the message
+        # Render a template that prompts users to add favorites first
         return render_template('no_favorites.html')
     else:
-        # If there are favorites, proceed to fetch and display recommendations
-        # This part requires your logic to fetch recommendations based on favorites
-        # For demonstration, it's just rendering recommend.html
-        # Replace the following line with your recommendation fetching and rendering logic
-        return render_template('recommend.html')
+        # Fetch 6 recommendations based on the favorites
+        favorites = session['favorites']
+        recommendations = get_recommendations(favorites, data_encoded, combined_sim, N=6)
+
+        # Initialize 'seen_songs' in session if it doesn't exist
+        if 'seen_songs' not in session:
+            session['seen_songs'] = []
+
+        # Add the recommended songs to the list of seen songs
+        for song in recommendations:
+            if song['track_id'] not in session['seen_songs']:
+                session['seen_songs'].append(song['track_id'])
+
+        session.modified = True  # Ensure the session is marked as modified
+
+        # Render a template with the recommendations
+        return render_template('recommendations.html', songs=recommendations)
+
 
 
 @app.route('/reset')
