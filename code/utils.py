@@ -143,18 +143,18 @@ def get_popular_songs(data_encoded, seen_track_ids, N=5):
     # Exclude songs that have already been seen
     data = data[~data['track_id'].isin(seen_track_ids)]
     
-    # Invert the popularity score if higher scores indicate higher popularity
-    max_popularity = data['popularity'].max()
-    data['inverse_popularity'] = max_popularity - data['popularity']
-    
-    # Normalize the inverse popularity scores to sum to 1 (to use as probabilities)
-    data['inverse_popularity'] /= data['inverse_popularity'].sum()
+    # Ensure there's data to select from
+    if len(data) == 0:
+        return []
+
+    # Normalize the popularity scores to sum to 1 (to use as probabilities)
+    data['normalized_popularity'] = data['popularity'] / data['popularity'].sum()
     
     # It's possible that after filtering, fewer than N songs remain
     num_songs_to_select = min(N, len(data))
     
-    # Select N songs randomly, weighted by the inverse of their popularity
-    selected_indices = np.random.choice(data.index, size=num_songs_to_select, replace=False, p=data['inverse_popularity'].values)
+    # Select N songs randomly, weighted by their popularity
+    selected_indices = np.random.choice(data.index, size=num_songs_to_select, replace=False, p=data['normalized_popularity'].values)
     selected_songs = data.loc[selected_indices]
     
     # Format the selected songs in the desired output format
@@ -166,6 +166,7 @@ def get_popular_songs(data_encoded, seen_track_ids, N=5):
         song['similarity_score'] = None
     
     return recommended_list
+
     
 def update_seen_songs(seen_songs, new_songs):
     seen_songs.update(new_songs)

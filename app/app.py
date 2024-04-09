@@ -11,6 +11,7 @@ import os, sys
 
 # Determine the directory path of the currently executing script
 dir_path = os.path.dirname(os.path.realpath(__file__))
+
 # Include the 'code' directory to the system path to import custom utility functions
 sys.path.append(os.path.join(dir_path, '../code'))
 
@@ -80,14 +81,24 @@ def add_favorites():
 
 @app.route('/recommend')
 def recommend():
-    # Render the recommend.html template for the song recommendation page
-    return render_template('recommend.html')
+    # Check if 'favorites' exists in session and is not empty
+    if 'favorites' not in session or not session['favorites']:
+        # If there are no favorites, render a specific template or return a custom message
+        # This uses a custom template 'no_favorites.html' for displaying the message
+        return render_template('no_favorites.html')
+    else:
+        # If there are favorites, proceed to fetch and display recommendations
+        # This part requires your logic to fetch recommendations based on favorites
+        # For demonstration, it's just rendering recommend.html
+        # Replace the following line with your recommendation fetching and rendering logic
+        return render_template('recommend.html')
+
 
 @app.route('/reset')
 def reset_data():
     # Reset the 'seen_songs' in the session
     session['seen_songs'] = []
-    
+    session['favorites'] = []
     # Redirect to the home page or another page as needed
     return redirect(url_for('home'))
 

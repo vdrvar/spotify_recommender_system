@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="no-favorites-message">
+    <h2>Ready to discover new tunes?</h2>
+    <p>Explore songs and add some to your favorites! After that, I'll give you songs you might like.</p>
+    <button onclick="location.href='/explore'">Explore Songs</button>
+</div>
+{% endblock %}
+
+{% block head %}
+<style>
+    .no-favorites-message {
+        background-color: #282828;
+        color: #FFFFFF;
+        text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px;
+    }
+    .no-favorites-message h2 {
+        color: #1DB954;
+    }
+    .no-favorites-message p {
+        margin: 20px 0;
+    }
+    .no-favorites-message button {
+        background-color: #1DB954;
+        color: #FFFFFF;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    .no-favorites-message button:hover {
+        background-color: #1ed760;
+    }
+</style>
+{% endblock %}
