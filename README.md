@@ -1,7 +1,8 @@
 # Spotify Recommender System
 
 ## Overview
-The Spotify Recommender System is a Flask-based web application designed to provide personalized song recommendations. Leveraging user preferences and a sophisticated recommendation algorithm, the system curates a list of songs that users might enjoy, based on their interaction history and selected favorites.
+The Spotify Recommender System is a Flask-based web application designed to provide personalized song recommendations. This system leverages a recommendation algorithm that utilizes both cosine similarity and radial basis function (RBF) similarity to analyze user preferences and interaction history. By integrating these similarity measures, the system can curate a list of songs that users might enjoy, tailoring recommendations to match their unique musical tastes accurately.
+
 
 ## Features
 - **Explore Songs**: Browse through a curated list of songs.
