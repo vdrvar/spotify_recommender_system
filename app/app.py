@@ -13,13 +13,13 @@ import os, sys
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # Include the 'code' directory to the system path to import custom utility functions
-sys.path.append(os.path.join(dir_path, '../code'))
+# sys.path.append(os.path.join(dir_path, '../code'))
 
 # Import custom utility functions from utils.py
 from utils import *
 
 # Construct the absolute path to the dataset
-data_file_path = os.path.join(dir_path, '../data/complete_dataset.csv')
+data_file_path = os.path.join(dir_path, 'complete_dataset.csv')
 # Load the dataset into a pandas DataFrame
 df = pd.read_csv(data_file_path)
 
