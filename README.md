@@ -80,7 +80,7 @@ Contributions are what make the open-source community such an amazing place to l
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
-Your Name - [@v_drvar](https://twitter.com/yourtwitter)
+X - [@v_drvar](https://twitter.com/yourtwitter)
 
 Project Link: [https://github.com/vdrvar/spotify-recommender-system](https://github.com/vdrvar/spotify-recommender-system)
 
