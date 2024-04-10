@@ -19,9 +19,10 @@ The Spotify Recommender System is a Flask-based web application designed to prov
 ## Getting Started
 
 ### Prerequisites
-Ensure you have Python 3.6+ installed on your system. Flask can be installed and run on Windows, macOS, and Linux environments.
+- Ensure you have Python 3.6+ installed on your system. Flask can be installed and run on Windows, macOS, and Linux environments.
+- Docker installed on your system if you wish to run the application in a container.
 
-### Installation
+#### Running Locally
 1. Clone the repository:
 git clone https://github.com/vdrvar/spotify-recommender-system.git
 
@@ -34,9 +35,36 @@ pip install -r requirements.txt
 4. Run the Flask application:
 flask run
 
+#### Running with Docker
+1. Build the Docker image:
+docker build -t spotify-recommender-system .
 
-## Usage
+2. Run the Docker container:
+docker run -p 5000:5000 spotify-recommender-system
+
 After running the application, visit `http://127.0.0.1:5000/` in your web browser to start exploring songs and receiving recommendations.
+
+## Contributing
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Contact
+Your Name - [@v_drvar](https://twitter.com/v_drvar)
+
+Project Link: [https://github.com/vdrvar/spotify-recommender-system](https://github.com/vdrvar/spotify-recommender-system)
+
+## Acknowledgements
+- [Flask](https://flask.palletsprojects.com/)
+- [Python](https://www.python.org/)
+
 
 ## Contributing
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
