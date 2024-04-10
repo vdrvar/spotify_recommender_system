@@ -60,7 +60,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## Contact
 X - [@v_drvar](https://twitter.com/v_drvar)
 
-Github: [https://github.com/vdrvar/spotify-recommender-system](https://github.com/vdrvar/spotify-recommender-system)
+Github: [https://github.com/vdrvar/spotify-recommender-system](https://github.com/vdrvar/)
 
 ## Acknowledgements
 - [Flask](https://flask.palletsprojects.com/)
