@@ -58,7 +58,7 @@ Contributions are what make the open-source community such an amazing place to l
 Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
-X - [@v_drvar](https://twitter.com/v_drvar)
+X - [@VjekoslavDrvar](https://twitter.com/v_drvar)
 
 Github: [https://github.com/vdrvar/spotify-recommender-system](https://github.com/vdrvar/)
 
