@@ -15,9 +15,11 @@ The Spotify Recommender System is a Flask-based web application designed to prov
 
 
 ### Explore Songs
+![image](https://github.com/vdrvar/spotify_recommender_system/assets/48907543/45dfc499-c287-44b0-8567-887b269e83f9)
 
 
 ### Recommendations
+![image](https://github.com/vdrvar/spotify_recommender_system/assets/48907543/62965992-fd4a-4c5c-a9d4-138622d0c09b)
 
 
 ## Technologies Used
