@@ -9,6 +9,15 @@ import random
 
 import os, sys
 
+from redis import Redis
+import pickle
+import time
+
+import uuid
+
+# Initialize Redis
+redis_client = Redis(host='redis', port=6379, db=0, decode_responses=False)
+
 # Determine the directory path of the currently executing script
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -65,50 +74,61 @@ def explore():
     # Render the explore.html template, passing the popular_songs to the template
     return render_template('explore.html', songs=popular_songs)
 
+@app.before_request
+def ensure_session_id():
+    if 'session_id' not in session:
+        # Generate a new session ID and store it in the session
+        session['session_id'] = uuid.uuid4().hex
+
 @app.route('/add_favorites', methods=['POST'])
 def add_favorites():
     track_ids = request.form.getlist('track_ids')
+    updated = False
+
     if 'favorites' not in session:
         session['favorites'] = []
 
     for track_id in track_ids:
         if track_id not in session['favorites']:
             session['favorites'].append(track_id)
+            updated = True
 
-    session.modified = True
+    if updated:
+        session.modified = True
+        # Generate new recommendations and cache them
+        favorites = session['favorites']
+        recommendations = get_recommendations(favorites, data_encoded, combined_sim, N=6)
+        # Cache the recommendations with a timestamp key to manage freshness
+        redis_client.set(f'recommendations_{session["session_id"]}', pickle.dumps(recommendations), ex=3600)  # Expires in 1 hour
 
-    # Redirect user back to the page they came from
-    if request.referrer:
-        if '/explore' in request.referrer:
-            return redirect(url_for('explore'))
-        elif '/recommend' in request.referrer:
-            return redirect(url_for('recommend'))
-    return redirect(url_for('home'))
+    return redirect(request.referrer or url_for('home'))
+
 
 
 @app.route('/recommend')
 def recommend():
     if 'favorites' not in session or not session['favorites']:
-        # Render a template that prompts users to add favorites first
         return render_template('no_favorites.html')
     else:
-        # Fetch 6 recommendations based on the favorites
-        favorites = session['favorites']
-        recommendations = get_recommendations(favorites, data_encoded, combined_sim, N=6)
+        session_id = session.get('session_id')
+        pickled_recommendations = redis_client.get(f'recommendations_{session_id}')
+        
+        if pickled_recommendations:
+            # Load the recommendations from Redis
+            recommendations = pickle.loads(pickled_recommendations)
+            # Clear the cache immediately after fetching
+            redis_client.delete(f'recommendations_{session_id}')
+        else:
+            # Generate recommendations if not available in cache
+            favorites = session['favorites']
+            recommendations = get_recommendations(favorites, data_encoded, combined_sim, N=6)
+            # Do not cache these newly generated recommendations immediately
 
-        # Initialize 'seen_songs' in session if it doesn't exist
-        if 'seen_songs' not in session:
-            session['seen_songs'] = []
-
-        # Add the recommended songs to the list of seen songs
-        for song in recommendations:
-            if song['track_id'] not in session['seen_songs']:
-                session['seen_songs'].append(song['track_id'])
-
-        session.modified = True  # Ensure the session is marked as modified
-
-        # Render a template with the recommendations
         return render_template('recommendations.html', songs=recommendations)
+
+
+
+
 
 
 
