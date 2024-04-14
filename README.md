@@ -7,11 +7,11 @@ The Spotify Recommender System is a Flask-based web application designed to prov
 - **Explore Songs**: Browse through a curated list of songs.
 - **Personalized Recommendations**: Receive song recommendations tailored to your musical taste.
 - **Favorites**: Add songs to your favorites list for personalized recommendations.
-- **Responsive Design**: Enjoy a seamless experience across different devices.
 
 ## Screenshots
 
 ### Home Page
+![image](https://github.com/vdrvar/spotify_recommender_system/assets/48907543/8a98c2b3-4121-46c0-b904-0fc41d3ff5a1)
 
 
 ### Explore Songs
