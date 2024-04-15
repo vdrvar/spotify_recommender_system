@@ -39,14 +39,14 @@ The Spotify Recommender System is a Flask-based web application designed to prov
 To run the application using Docker Compose, which sets up both the application and its dependencies like Redis and Prometheus:
 
 1. **Clone the repository:**
-git clone https://github.com/vdrvar/spotify-recommender-system.git
+`git clone https://github.com/vdrvar/spotify-recommender-system.git`
 
 2. **Navigate to the app directory:**
-cd spotify-recommender-system/app
+`cd spotify-recommender-system/app`
 
 
 3. **Build and start the services:**
-docker-compose up --build
+`docker-compose up --build`
 
 
 This command builds the necessary Docker images and starts the services defined in the `docker-compose.yml` file. It includes your Flask application, Redis, and Prometheus.
@@ -56,14 +56,14 @@ After running the Docker Compose command, visit `http://localhost:5000/` in your
 
 ### Shutting Down
 To stop and remove the containers set up by Docker Compose:
-docker-compose down
+`docker-compose down`
 
 
 This command stops all the running containers and removes them along with their network, but keeps your data intact.
 
 ### Cleaning Up
 To remove everything, including any volumes created by Docker Compose:
-docker-compose down -v
+`docker-compose down -v`
 
 
 This will remove the containers, network, and all data associated with the application's Docker Compose setup.
