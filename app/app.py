@@ -15,6 +15,8 @@ import time
 
 import uuid
 
+from prometheus_flask_exporter import PrometheusMetrics
+
 # Initialize Redis
 redis_client = Redis(host='redis', port=6379, db=0, decode_responses=False)
 
@@ -40,6 +42,12 @@ combined_sim = make_similarities(df=df, de=data_encoded, cos_ratio=0.2, rbf_rati
 
 # Initialize the Flask application
 app = Flask(__name__)
+
+metrics = PrometheusMetrics(app)
+
+# static information as metric
+metrics.info('app_info', 'Application info', version='1.0.3')
+
 # Set a secret key for session management. Replace 'your secret key' with a real secret key for production.
 app.secret_key = 'your secret key'
 
@@ -112,20 +120,15 @@ def recommend():
     else:
         session_id = session.get('session_id')
         pickled_recommendations = redis_client.get(f'recommendations_{session_id}')
-        
         if pickled_recommendations:
-            # Load the recommendations from Redis
             recommendations = pickle.loads(pickled_recommendations)
-            # Clear the cache immediately after fetching
-            redis_client.delete(f'recommendations_{session_id}')
         else:
-            # Generate recommendations if not available in cache
             favorites = session['favorites']
             recommendations = get_recommendations(favorites, data_encoded, combined_sim, N=6)
-            # Do not cache these newly generated recommendations immediately
+            # Make sure to store the pickled data correctly
+            redis_client.set(f'recommendations_{session_id}', pickle.dumps(recommendations), ex=3600)  # Cache for 1 hour
 
         return render_template('recommendations.html', songs=recommendations)
-
 
 
 
