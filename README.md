@@ -40,12 +40,12 @@ To run the application using Docker Compose, which sets up both the application 
 
 1. **Clone the repository:**
 ```
-git clone https://github.com/vdrvar/spotify-recommender-system.git
+git clone https://github.com/vdrvar/spotify_recommender_system.git
 ```
 
 2. **Navigate to the app directory:**
 ```
-cd spotify-recommender-system/app
+cd spotify_recommender_system/app
 ```
 
 
